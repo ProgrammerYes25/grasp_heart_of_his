@@ -19,7 +19,7 @@
             android:layout_marginTop="18dp"
             android:enabled="false"
             android:textSize="9pt"
-            android:textColor="@color/black"
+            android:textColor="#8A8A8A"
             android:background="@color/white"
             android:text="진행할 스토리를 골라주세요."
             />
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:background="@drawable/back_btn"/>
+            android:src="@drawable/back_btn"/>
     </LinearLayout>
     <ListView
         android:layout_width="match_parent"
