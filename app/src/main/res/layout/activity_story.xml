@@ -8,6 +8,7 @@
     android:background="@color/white"
     tools:context=".StoryActivity">
     <TextView
+        android:id="@+id/chapter_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
+            android:id="@+id/character_img"
              android:layout_width="290dp"
              android:layout_height="410.85dp"
              android:layout_marginLeft="61dp"
@@ -26,6 +28,7 @@
              android:src="@drawable/java1"
              />
         <Button
+            android:id="@+id/chat_box"
             android:layout_width="390dp"
             android:layout_height="220dp"
             android:layout_gravity="center"
@@ -37,6 +40,7 @@
             android:background="@drawable/chat_window"
             />
         <Button
+            android:id="@+id/name_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

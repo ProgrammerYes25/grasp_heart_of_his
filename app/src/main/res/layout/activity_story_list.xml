@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/list_background"
+
     tools:context=".storyListActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,14 +13,12 @@
         android:padding="15dp"
         android:background="@color/white"
         android:orientation="horizontal">
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:enabled="false"
             android:textSize="9pt"
             android:textColor="#8A8A8A"
-            android:background="@color/white"
             android:text="진행할 스토리를 골라주세요."
             />
         <ImageView
@@ -31,6 +29,9 @@
             android:src="@drawable/back_btn"/>
     </LinearLayout>
     <ListView
+        android:id="@+id/story_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="20dp"/>
 </LinearLayout>
