@@ -27,13 +27,10 @@
             android:layout_marginLeft="60dp"
             android:src="@drawable/back_btn"/>
     </LinearLayout>
-    <LinearLayout
+    <ListView
+        android:id="@+id/diary_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/list_background">
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
-
+        android:background="@color/white"
+        android:padding="20dp"/>
 </LinearLayout>

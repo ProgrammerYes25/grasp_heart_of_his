@@ -1,9 +1,7 @@
 package ctrl_s_0106_2114_0815_2112_ysgy.project.grasp_heart_of_his;
 
-import androidx.annotation.ColorLong;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,7 +22,7 @@ public class storyListActivity extends AppCompatActivity {
     ImageView backBtn;
     DBHelper dbHelper;
     SQLiteDatabase db;
-    ArrayList storyLsit;
+    ArrayList storyList;
     ArrayAdapter<String> storyAdapter;
     ListView storyListView;
     static int chapter;
@@ -41,13 +39,13 @@ public class storyListActivity extends AppCompatActivity {
             }
         });
         storyListView = findViewById(R.id.story_list_view);
-        storyLsit = new ArrayList();
+        storyList = new ArrayList();
         dbHelper = new DBHelper(this);
         db = dbHelper.getReadableDatabase();
         Cursor cursor;
         cursor = db.rawQuery("SELECT * FROM userTable;", null);
-        setStoryLsit(cursor);
-        storyAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, storyLsit){
+        setStoryList(cursor);
+        storyAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, storyList){
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
             {
@@ -76,9 +74,9 @@ public class storyListActivity extends AppCompatActivity {
             }
         }
     };
-    public void setStoryLsit(Cursor cursor){
+    public void setStoryList(Cursor cursor){
         while(cursor.moveToNext()){
-            storyLsit.add(cursor.getInt(0)+" 쳅터");
+            storyList.add("Chapter "+cursor.getInt(0));
         }
     }
 }
