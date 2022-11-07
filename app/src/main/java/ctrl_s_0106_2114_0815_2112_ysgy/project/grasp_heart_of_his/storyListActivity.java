@@ -11,10 +11,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -53,12 +55,27 @@ public class storyListActivity extends AppCompatActivity {
                 TextView tv = view.findViewById(android.R.id.text1);
                 tv.setTextColor(Color.BLACK);
                 tv.setTextSize(20.0f);
-                tv.setBackgroundColor(R.drawable.story_btn);
+                tv.setBackgroundColor(Color.rgb(186,207,255));
                 return view;
             }
         };
         storyListView.setAdapter(storyAdapter);
+        storyListView.setOnItemClickListener(stListener);
     }
+    AdapterView.OnItemClickListener stListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int chapter, long id) {
+            int finishCh = 1;
+            if(chapter+1 > finishCh) {
+                Toast.makeText(getApplicationContext(),"업데이트 예정 입니다.", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                storyListActivity.chapter = chapter+1;
+                Intent storyIntene = new Intent(getApplicationContext(), StoryActivity.class);
+                startActivity(storyIntene);
+            }
+        }
+    };
     public void setStoryLsit(Cursor cursor){
         while(cursor.moveToNext()){
             storyLsit.add(cursor.getInt(0)+" 쳅터");
