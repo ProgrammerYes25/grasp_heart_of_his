@@ -6,7 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class macroClass {
-    public void storyMacro(int chapter, TextView chText, ImageView characterImg, Button nameBox, Button chBox){
+    public static void storyMacro(int chapter, TextView chText, ImageView characterImg, Button nameBox, Button chBox){
+s
 
     }
 }
