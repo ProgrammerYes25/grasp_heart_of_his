@@ -7,31 +7,33 @@
     android:orientation="vertical"
     android:background="@color/white" 
     tools:context=".StoryActivity">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="20dp"
         android:orientation="horizontal"
         >
         <TextView
             android:id="@+id/chapter_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:textSize="10pt"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
             android:background="@color/white"
-            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textColor="#454545"
             android:text="1챕터"/>
         <Button
             android:id="@+id/back_btn"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="150dp"
+            android:layout_alignParentRight="true"
             android:text="끝내기"
             android:textSize="8pt"
             android:background="@drawable/name_btn"
             />
-    </LinearLayout>
+    </RelativeLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
