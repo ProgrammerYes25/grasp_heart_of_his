@@ -25,7 +25,21 @@ public class MacroClass extends AppCompatActivity {
              @Override
              public void onClick(View v) {
                  if(sc.hasNextLine()){
-                     nameBox.setText(sc.next());
+                     String name = sc.next();
+                     switch(name){
+                         case "JAVA":
+                             characterImg.setImageResource(R.drawable.java);
+                             break;
+                         case "C":
+                             break;
+                         case "C++":
+                             break;
+                         case "C#":
+                             break;
+                         case "Python":
+                             break;
+                     }
+                     nameBox.setText(name);
                      chatBox.setText(sc.next());
                  }
              }
