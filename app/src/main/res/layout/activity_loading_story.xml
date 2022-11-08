@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:background="#FFB3B3"
         android:padding="20dp"
-        android:text="어떤 표현법을 써야 내 맘이 전해질까? 내맘을 복사해 너에게 붙여 넣어야 하는 걸까?"
+        android:text="신의 사자 Tip...."
         android:textStyle="bold"
         android:textColor="#7C7C7C"
         android:textSize="8pt"

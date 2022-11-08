@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.InputStream;
+
 public class StoryActivity extends AppCompatActivity {
     TextView chapterText;
     ImageView characterImg;
@@ -35,7 +37,10 @@ public class StoryActivity extends AppCompatActivity {
         database = dbHelper.getWritableDatabase();
         database.rawQuery("SELECT * FROM userTable WHERE chapter_no ="+chapter+";",null);
         backBtn.setOnClickListener(backOnClickListener);
-
+        //test code
+        MacroClass macroClass = new MacroClass();
+        InputStream inputText = getResources().openRawResource(R.raw.test);
+        macroClass.storyMacro(inputText, characterImg, nameBox, chatBox);
     }
     View.OnClickListener backOnClickListener = new View.OnClickListener() {
         @Override
