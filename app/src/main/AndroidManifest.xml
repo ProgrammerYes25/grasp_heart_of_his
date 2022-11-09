@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Grasp_heart_of_his">
         <activity
+            android:name=".DiaryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
             android:name=".loadingStoryActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -30,7 +34,7 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".startActivity"
+            android:name=".StartActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>

@@ -11,10 +11,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class diaryListActivity extends AppCompatActivity {
     ImageView backBtn;
     DBHelper dbHelper;
     SQLiteDatabase db;
+    TextView guideText;
     ArrayList diaryList;
     ArrayAdapter<String> diaryAdapter;
     ListView diaryListView;
@@ -38,14 +41,16 @@ public class diaryListActivity extends AppCompatActivity {
                 startActivity(backIntent);
             }
         });
-
+        guideText = findViewById(R.id.guide_text);
         diaryListView = findViewById(R.id.diary_list_view);
         diaryList = new ArrayList();
         dbHelper = new DBHelper(this);
         db = dbHelper.getReadableDatabase();
-        db.execSQL("UPDATE userTable SET total_likability = 0 WHERE chapter_no = 1");
+//        db.execSQL("UPDATE userTable SET total_likability = 0 WHERE chapter_no = 1");
+//        Cursor cursor;
+//        cursor = db.rawQuery("SELECT * FROM userTable WHERE total_likability != 0", null);
         Cursor cursor;
-        cursor = db.rawQuery("SELECT * FROM userTable WHERE total_likability != 0", null);
+        cursor = db.rawQuery("SELECT * FROM userTable", null);
         setDiaryList(cursor);
         diaryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, diaryList){
             @Override
@@ -58,12 +63,29 @@ public class diaryListActivity extends AppCompatActivity {
                 return view;
             }
         };
+//        if(diaryList.equals(null)) {
+//            guideText.setText("스토리 진행시 해금됩니다.");
+//        }
         diaryListView.setAdapter(diaryAdapter);
-        //diaryListView.setOnItemClickListener();
+        diaryListView.setOnItemClickListener(diItemClickListener);
     }
+    AdapterView.OnItemClickListener diItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int day, long id) {
+            int finishDay = 1;
+            if(day+1 > finishDay){
+                Toast.makeText(getApplicationContext(), "업데이트 예정 입니다.",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                diaryListActivity.day = day;
+                Intent DiaryIntent = new Intent(getApplicationContext(), DiaryActivity.class);
+                startActivity(DiaryIntent);
+            }
+        }
+    };
     public void setDiaryList(Cursor cursor){
-        while(cursor.moveToNext()){
-            diaryList.add("D+Day"+cursor.getInt(0));
+        while (cursor.moveToNext()) {
+            diaryList.add("D+" + cursor.getInt(0)+"Day");
         }
     }
 }

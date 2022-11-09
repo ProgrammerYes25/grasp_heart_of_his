@@ -1,5 +1,6 @@
 package ctrl_s_0106_2114_0815_2112_ysgy.project.grasp_heart_of_his;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 
 import android.view.View;
@@ -21,22 +22,49 @@ public class MacroClass extends AppCompatActivity {
         Scanner sc = new Scanner(inputText, "UTF-8");
         nameBox.setText(sc.next());
         chatBox.setText(sc.next());
-         chatBox.setOnClickListener(new View.OnClickListener() {
+        chatBox.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  if(sc.hasNextLine()){
                      String name = sc.next();
+//                     switch(name){
+//                         case "JAVA":
+//                             characterImg.setImageResource(R.drawable.java);
+//                             break;
+//                         case "C":
+//                             characterImg.setImageResource(R.drawable.c);
+//                             break;
+//                         case "C++":
+//                             characterImg.setImageResource(R.drawable.cpp);
+//                             break;
+//                         case "C#":
+//                             characterImg.setImageResource(R.drawable.cs);
+//                             break;
+//                         case "Python":
+//                             characterImg.setImageResource(R.drawable.py);
+//                             break;
+//                         case "나":
+//                             characterImg.setImageResource(R.drawable.clear);
+//                             break;
+//                     }
                      switch(name){
-                         case "JAVA":
+                         case "1":
                              characterImg.setImageResource(R.drawable.java);
                              break;
-                         case "C":
+                         case "2":
+                             characterImg.setImageResource(R.drawable.c);
                              break;
-                         case "C++":
+                         case "3":
+                             characterImg.setImageResource(R.drawable.cpp);
                              break;
-                         case "C#":
+                         case "4":
+                             characterImg.setImageResource(R.drawable.cs);
                              break;
-                         case "Python":
+                         case "5":
+                             characterImg.setImageResource(R.drawable.py);
+                             break;
+                         case "6":
+                             characterImg.setImageResource(R.drawable.clear);
                              break;
                      }
                      nameBox.setText(name);
@@ -46,13 +74,9 @@ public class MacroClass extends AppCompatActivity {
          });
     }
 
-//    public static void loadingStoryMacro(InputStream inputText, Button tipBtn){
-//        Scanner sc = new Scanner(inputText, "UTF-8");
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void loadingStoryMacro(InputStream inputText, Button tipBtn){
+        Scanner sc = new Scanner(inputText, "UTF-8");
+        tipBtn.setText(sc.next());
+    }
 
 }
