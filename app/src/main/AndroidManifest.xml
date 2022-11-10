@@ -18,7 +18,7 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".StoryActivity"
+            android:name=".Chapter01"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity

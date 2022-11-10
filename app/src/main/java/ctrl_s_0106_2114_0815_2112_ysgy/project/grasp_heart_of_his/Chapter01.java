@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.io.InputStream;
 
-public class StoryActivity extends AppCompatActivity {
+public class Chapter01 extends AppCompatActivity {
     TextView chapterText;
     ImageView characterImg;
     Button chatBox, nameBox, backBtn;
@@ -43,8 +43,8 @@ public class StoryActivity extends AppCompatActivity {
         MacroClass macroClass = new MacroClass();
         InputStream inputText = getResources().openRawResource(R.raw.test);
         macroClass.storyMacro(inputText, characterImg, nameBox, chatBox);
-        questionDlog = View.inflate(StoryActivity.this, R.layout.question_dlog, null);
-        AlertDialog.Builder dlg = new AlertDialog.Builder(StoryActivity.this);
+        questionDlog = View.inflate(Chapter01.this, R.layout.question_dlog, null);
+        AlertDialog.Builder dlg = new AlertDialog.Builder(Chapter01.this);
     }
 
     //InputStream inputText,
@@ -63,7 +63,7 @@ public class StoryActivity extends AppCompatActivity {
     View.OnClickListener backOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AlertDialog.Builder dlg = new AlertDialog.Builder(StoryActivity.this);
+            AlertDialog.Builder dlg = new AlertDialog.Builder(Chapter01.this);
             dlg.setTitle("확인");
             dlg.setMessage("지금 나가면 현재 진행 사항이 저장 되지 않습니다.");
             dlg.setPositiveButton("나가기", new DialogInterface.OnClickListener() {

@@ -69,8 +69,8 @@ public class storyListActivity extends AppCompatActivity {
             }
             else {
                 storyListActivity.chapter = chapter+1;
-                Intent storyIntene = new Intent(getApplicationContext(), loadingStoryActivity.class);
-                startActivity(storyIntene);
+                Intent loadingStoryIntene = new Intent(getApplicationContext(), loadingStoryActivity.class);
+                startActivity(loadingStoryIntene);
             }
         }
     };

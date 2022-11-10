@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/chat_window"
+    android:orientation="vertical"
+    android:padding="20dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="10pt"
+        android:padding="15dp"
+        android:text="문제가 들어오는 자리입니다"/>
+    <Button
+        android:id="@+id/answer_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="9pt"
+        android:text="1대답"
+        android:background="@drawable/name_btn"/>
+    <Button
+        android:id="@+id/answer_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="9pt"
+        android:text="2대답"
+        android:background="@drawable/name_btn"/>
+    <Button
+        android:id="@+id/answer_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="9pt"
+        android:text="3대답"
+        android:background="@drawable/name_btn"/>
+
+</LinearLayout>

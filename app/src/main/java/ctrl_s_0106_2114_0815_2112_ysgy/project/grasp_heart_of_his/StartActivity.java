@@ -18,7 +18,6 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         startImg = findViewById(R.id.start_img);
-
         dbHelper = new DBHelper(this);
         database = dbHelper.getReadableDatabase();
         startImg.setOnClickListener(startClickListener);
@@ -28,6 +27,7 @@ public class StartActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent mainIntene = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(mainIntene);
+
         }
     };
 }

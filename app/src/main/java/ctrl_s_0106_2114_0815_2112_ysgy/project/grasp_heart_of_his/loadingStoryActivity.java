@@ -13,6 +13,8 @@ import java.io.InputStream;
 public class loadingStoryActivity extends AppCompatActivity {
     TextView chapterText;
     Button tipBtn;
+    int chapter;
+    Class[] chapterList = new Class[]{Chapter01.class};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,10 +25,11 @@ public class loadingStoryActivity extends AppCompatActivity {
         MacroClass macroClass = new MacroClass();
         InputStream inputText = getResources().openRawResource(R.raw.test);
         macroClass.loadingStoryMacro(inputText, tipBtn);
+        chapter = storyListActivity.chapter-1;
         tipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent storyIntene = new Intent(getApplicationContext(), StoryActivity.class);
+                Intent storyIntene = new Intent(getApplicationContext(), chapterList[chapter]);
                 startActivity(storyIntene);
             }
         });
