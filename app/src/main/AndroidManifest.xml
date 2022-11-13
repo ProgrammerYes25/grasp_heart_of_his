@@ -22,11 +22,15 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
+            android:name=".storyListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".diaryListActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".storyListActivity"
+            android:name=".Prologue"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity

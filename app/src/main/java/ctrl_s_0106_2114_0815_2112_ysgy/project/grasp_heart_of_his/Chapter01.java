@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.InputStream;
@@ -22,6 +24,7 @@ public class Chapter01 extends AppCompatActivity {
     SQLiteDatabase database;
     int chapter, answer;
     View questionDlog;
+    LinearLayout story;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +35,14 @@ public class Chapter01 extends AppCompatActivity {
         chatBox = findViewById(R.id.chat_box);
         nameBox = findViewById(R.id.name_box);
         backBtn = findViewById(R.id.back_btn);
+        story = findViewById(R.id.story_layout);
+        story.setBackgroundResource(R.drawable.main_background);
 //      this.chapter = storyListActivity.chapter;
         chapter = 1;
         chapterText.setText("Chapter "+chapter);
         dbHelper = new DBHelper(this);
         database = dbHelper.getWritableDatabase();
-        database.rawQuery("SELECT * FROM userTable WHERE chapter_no ="+chapter+";",null);
+        database.rawQuery("SELECT * FROM chapterTable WHERE chapter_no ="+chapter+";",null);
         backBtn.setOnClickListener(backOnClickListener);
         //test code
         MacroClass macroClass = new MacroClass();

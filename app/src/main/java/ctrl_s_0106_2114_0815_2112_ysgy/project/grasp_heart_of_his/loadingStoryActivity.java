@@ -14,7 +14,8 @@ public class loadingStoryActivity extends AppCompatActivity {
     TextView chapterText;
     Button tipBtn;
     int chapter;
-    Class[] chapterList = new Class[]{Chapter01.class};
+    int[] tip = {R.raw.test};
+    Class[] chapterList = new Class[]{Prologue.class, Chapter01.class};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,15 +23,23 @@ public class loadingStoryActivity extends AppCompatActivity {
         chapterText = findViewById(R.id.chapter_text);
         tipBtn = findViewById(R.id.tip_btn);
         //test code
+        chapter = storyListActivity.chapter;
+
+        if (chapter ==0){
+            chapterText.setText("Prologue");
+        }
+        else {
+            chapterText.setText("Chapter "+chapter);
+        }
+
         MacroClass macroClass = new MacroClass();
         InputStream inputText = getResources().openRawResource(R.raw.test);
         macroClass.loadingStoryMacro(inputText, tipBtn);
-        chapter = storyListActivity.chapter-1;
         tipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent storyIntene = new Intent(getApplicationContext(), chapterList[chapter]);
-                startActivity(storyIntene);
+                Intent storyIntense = new Intent(getApplicationContext(), chapterList[chapter]);
+                startActivity(storyIntense);
             }
         });
     }

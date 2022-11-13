@@ -1,8 +1,5 @@
 package ctrl_s_0106_2114_0815_2112_ysgy.project.grasp_heart_of_his;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,11 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.InputStream;
 
-public class StoryActivity extends AppCompatActivity {
+public class Prologue extends AppCompatActivity {
     TextView chapterText;
     ImageView characterImg;
     Button chatBox, nameBox, backBtn;
@@ -22,6 +23,7 @@ public class StoryActivity extends AppCompatActivity {
     SQLiteDatabase database;
     int chapter, answer;
     View questionDlog;
+    LinearLayout story;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +34,20 @@ public class StoryActivity extends AppCompatActivity {
         chatBox = findViewById(R.id.chat_box);
         nameBox = findViewById(R.id.name_box);
         backBtn = findViewById(R.id.back_btn);
+        story = findViewById(R.id.story_layout);
 //      this.chapter = storyListActivity.chapter;
-        chapterText.setText("Chapter "+chapter);
+        chapter = 0;
+        chapterText.setText("Prologue");
         dbHelper = new DBHelper(this);
         database = dbHelper.getWritableDatabase();
-        database.rawQuery("SELECT * FROM phapterTable WHERE chapter_no ="+chapter+";",null);
+        database.rawQuery("SELECT * FROM chapterTable WHERE chapter_no ="+chapter+";",null);
         backBtn.setOnClickListener(backOnClickListener);
         //test code
         MacroClass macroClass = new MacroClass();
         InputStream inputText = getResources().openRawResource(R.raw.test);
         macroClass.storyMacro(inputText, characterImg, nameBox, chatBox);
-        questionDlog = View.inflate(StoryActivity.this, R.layout.question_dlog, null);
-        AlertDialog.Builder dlg = new AlertDialog.Builder(StoryActivity.this);
+        questionDlog = View.inflate(Prologue.this, R.layout.question_dlog, null);
+        AlertDialog.Builder dlg = new AlertDialog.Builder(Prologue.this);
     }
 
     //InputStream inputText,
@@ -62,7 +66,8 @@ public class StoryActivity extends AppCompatActivity {
     View.OnClickListener backOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AlertDialog.Builder dlg = new AlertDialog.Builder(StoryActivity.this);
+            AlertDialog.Builder dlg = new AlertDialog.Builder(Prologue.this);
+            dlg.setTitle("확인");
             dlg.setMessage("지금 나가면 현재 진행 사항이 저장 되지 않습니다.");
             dlg.setPositiveButton("나가기", new DialogInterface.OnClickListener() {
                 @Override

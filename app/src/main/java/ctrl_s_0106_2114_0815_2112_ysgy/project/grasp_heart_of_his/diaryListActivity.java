@@ -50,7 +50,7 @@ public class diaryListActivity extends AppCompatActivity {
 //        Cursor cursor;
 //        cursor = db.rawQuery("SELECT * FROM userTable WHERE total_likability != 0", null);
         Cursor cursor;
-        cursor = db.rawQuery("SELECT * FROM userTable", null);
+        cursor = db.rawQuery("SELECT * FROM chapterTable", null);
         setDiaryList(cursor);
         diaryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, diaryList){
             @Override

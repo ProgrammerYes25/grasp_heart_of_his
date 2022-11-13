@@ -9,15 +9,17 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE Table(chapter_no INTEGER primary key, java_likability INTEGER, total_likability INTEGER);");
+        db.execSQL("CREATE TABLE chapterTable(chapter_no INTEGER primary key, java_likability INTEGER, total_likability INTEGER);");
+        db.execSQL("CREATE TABLE userTable(user_name TEXT primary key, likability INTEGER);");
         int total =0, likability = 0;
-        for(int i = 1; i<=15; i++){
-            db.execSQL("INSERT INTO userTable VALUES("+i+","+likability+","+total+");");
+        for(int i = 0; i<=15; i++){
+            db.execSQL("INSERT INTO chapterTable VALUES("+i+","+likability+","+total+");");
         }
         //db.close();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS chapterTable" );
         db.execSQL("DROP TABLE IF EXISTS userTable" );
         onCreate(db);
     }

@@ -31,6 +31,7 @@ public class storyListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_list);
         backBtn = findViewById(R.id.back_btn);
+        storyListActivity.chapter = 0;
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,7 +44,7 @@ public class storyListActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         db = dbHelper.getReadableDatabase();
         Cursor cursor;
-        cursor = db.rawQuery("SELECT * FROM userTable;", null);
+        cursor = db.rawQuery("SELECT * FROM chapterTable;", null);
         setStoryList(cursor);
         storyAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, storyList){
             @Override
@@ -62,13 +63,13 @@ public class storyListActivity extends AppCompatActivity {
     }
     AdapterView.OnItemClickListener stListener = new AdapterView.OnItemClickListener() {
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int chapter, long id) {
-            int finishCh = 1;
-            if(chapter+1 > finishCh) {
+        public void onItemClick(AdapterView<?> parent, View view, int itmeChapter, long id) {
+            int finishCh = 2;
+            if(itmeChapter > finishCh) {
                 Toast.makeText(getApplicationContext(),"업데이트 예정 입니다.", Toast.LENGTH_SHORT).show();
             }
             else {
-                storyListActivity.chapter = chapter+1;
+                storyListActivity.chapter = itmeChapter;
                 Intent loadingStoryIntene = new Intent(getApplicationContext(), loadingStoryActivity.class);
                 startActivity(loadingStoryIntene);
             }
@@ -76,6 +77,10 @@ public class storyListActivity extends AppCompatActivity {
     };
     public void setStoryList(Cursor cursor){
         while(cursor.moveToNext()){
+            if(cursor.getInt(0)==0){
+                storyList.add("Prologue");
+                continue;
+            }
             storyList.add("Chapter "+cursor.getInt(0));
         }
     }
