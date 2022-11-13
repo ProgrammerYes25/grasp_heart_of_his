@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -19,7 +20,7 @@ import java.util.logging.LogRecord;
 
 
 public class MacroClass extends AppCompatActivity {
-    public void storyMacro(InputStream inputText, ImageView characterImg, Button nameBox, Button chatBox){
+    public void storyMacro(InputStream inputText, ImageView characterImg, Button nameBox, Button chatBox, int backgroun, LinearLayout layout){
         Scanner sc = new Scanner(inputText, "UTF-8");
         nameBox.setText(sc.nextLine());
         chatBox.setText(sc.nextLine());
@@ -56,27 +57,10 @@ public class MacroClass extends AppCompatActivity {
                              nameBox.setText(name);
                              break;
                      }
-//                     switch(name){
-//                         case "1":
-//                             characterImg.setImageResource(R.drawable.java);
-//                             break;
-//                         case "2":
-//                             characterImg.setImageResource(R.drawable.c);
-//                             break;
-//                         case "3":
-//                             characterImg.setImageResource(R.drawable.cpp);
-//                             break;
-//                         case "4":
-//                             characterImg.setImageResource(R.drawable.cs);
-//                             break;
-//                         case "5":
-//                             characterImg.setImageResource(R.drawable.py);
-//                             break;
-//                         case "6":
-//                             characterImg.setImageResource(R.drawable.clear);
-//                             break;
-//                     }
                      chatBox.setText(sc.nextLine());
+                 }
+                 else{
+                     layout.setBackgroundResource(backgroun);
                  }
              }
          });

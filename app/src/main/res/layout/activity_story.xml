@@ -22,6 +22,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:background="@color/white"
+            android:padding="5dp"
             android:textStyle="bold"
             android:textColor="#454545"
             android:text="1챕터"/>
@@ -45,7 +46,6 @@
              android:layout_height="410.85dp"
              android:layout_marginLeft="61dp"
             android:layout_marginTop="62dp"
-             android:src="@drawable/java1"
              />
         <Button
             android:id="@+id/chat_box"

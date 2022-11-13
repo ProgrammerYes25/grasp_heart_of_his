@@ -37,8 +37,7 @@ public class Chapter01 extends AppCompatActivity {
         backBtn = findViewById(R.id.back_btn);
         story = findViewById(R.id.story_layout);
         story.setBackgroundResource(R.drawable.main_background);
-//      this.chapter = storyListActivity.chapter;
-        chapter = 1;
+        this.chapter = storyListActivity.chapter;
         chapterText.setText("Chapter "+chapter);
         dbHelper = new DBHelper(this);
         database = dbHelper.getWritableDatabase();
@@ -47,7 +46,7 @@ public class Chapter01 extends AppCompatActivity {
         //test code
         MacroClass macroClass = new MacroClass();
         InputStream inputText = getResources().openRawResource(R.raw.test);
-        macroClass.storyMacro(inputText, characterImg, nameBox, chatBox);
+        //macroClass.storyMacro(inputText, characterImg, nameBox, chatBox);
         questionDlog = View.inflate(Chapter01.this, R.layout.question_dlog, null);
         AlertDialog.Builder dlg = new AlertDialog.Builder(Chapter01.this);
     }
