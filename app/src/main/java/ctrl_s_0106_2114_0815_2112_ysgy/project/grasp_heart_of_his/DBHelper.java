@@ -10,7 +10,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE chapterTable(chapter_no INTEGER primary key, java_likability INTEGER, total_likability INTEGER);");
-        db.execSQL("CREATE TABLE userTable(user_name TEXT primary key, likability INTEGER);");
+        db.execSQL("CREATE TABLE userTable(user_name CHAR(20) primary key, likability INTEGER, play_chapter INTEGER);");
         int total =0, likability = 0;
         for(int i = 0; i<=15; i++){
             db.execSQL("INSERT INTO chapterTable VALUES("+i+","+likability+","+total+");");
