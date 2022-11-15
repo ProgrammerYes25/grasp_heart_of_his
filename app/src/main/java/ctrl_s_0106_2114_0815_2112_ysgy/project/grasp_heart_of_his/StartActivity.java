@@ -6,21 +6,23 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 public class StartActivity extends AppCompatActivity {
     ImageView startImg;
     DBHelper dbHelper;
-    SQLiteDatabase database;
+    SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         startImg = findViewById(R.id.start_img);
         dbHelper = new DBHelper(this);
-        database = dbHelper.getReadableDatabase();
+        db = dbHelper.getReadableDatabase();
         startImg.setOnClickListener(startClickListener);
+        //데이터 베이스 close
+        db.close();
+        dbHelper.close();
     }
     View.OnClickListener startClickListener = new View.OnClickListener() {
         @Override

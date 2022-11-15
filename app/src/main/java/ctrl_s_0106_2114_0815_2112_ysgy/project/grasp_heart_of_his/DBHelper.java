@@ -15,7 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
         for(int i = 0; i<=15; i++){
             db.execSQL("INSERT INTO chapterTable VALUES("+i+","+likability+","+total+");");
         }
-        //db.close();
+        db.close();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

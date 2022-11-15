@@ -16,7 +16,7 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
     ImageView storyBtn, diaryBtn;
     DBHelper dbHelper;
-    SQLiteDatabase database;
+    SQLiteDatabase db;
     View nameDlog;
     Button saveNameBtn;
     EditText editName;
@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
         storyBtn = findViewById(R.id.story_btn);
         diaryBtn = findViewById(R.id.diary_btn);
         dbHelper = new DBHelper(this);
-        database = dbHelper.getWritableDatabase();
+        db = dbHelper.getWritableDatabase();
         Cursor cursor;
-        cursor = database.rawQuery("SELECT * FROM userTable;", null);
+        cursor = db.rawQuery("SELECT * FROM userTable;", null);
         setUsername(cursor);
         storyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(diaryListIntene);
             }
         });
+        //데이터 베이스 close
+        cursor.close();
+        db.close();
+        dbHelper.close();
     }
     public void setUsername(Cursor cursor){
         if(!(cursor.moveToNext())){
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     checkDlg.setPositiveButton("계속하기", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            database.execSQL("INSERT INTO userTable VALUES('"+editName.getText().toString()+"',"+ 0+","+ 0+");");
+                            db.execSQL("INSERT INTO userTable VALUES('"+editName.getText().toString()+"',"+ 0+","+ 0+");");
                             Intent mainIntene = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(mainIntene);
                         }

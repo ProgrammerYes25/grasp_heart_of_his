@@ -22,9 +22,9 @@ public class Prologue extends AppCompatActivity {
     ImageView characterImg;
     Button chatBox, nameBox, backBtn, endBtn;
     DBHelper dbHelper;
-    SQLiteDatabase database;
-    int chapter, answer, resNum=0;
-    View endDlog, questionDlog;
+    SQLiteDatabase db;
+    int chapter, resNum=0;
+    View endDlog;
     LinearLayout story;
     InputStream inputText;
     String userName;
@@ -36,28 +36,28 @@ public class Prologue extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story);
-        MacroClass macroClass;
         chapterText = findViewById(R.id.chapter_text);
         characterImg = findViewById(R.id.character_img);
         chatBox = findViewById(R.id.chat_box);
         nameBox = findViewById(R.id.name_box);
         backBtn = findViewById(R.id.back_btn);
         story = findViewById(R.id.story_layout);
+
         dbHelper = new DBHelper(this);
-        database = dbHelper.getWritableDatabase();
+        db = dbHelper.getWritableDatabase();
         Cursor cursor;
-        cursor = database.rawQuery("SELECT * FROM userTable;", null);
+        cursor = db.rawQuery("SELECT * FROM userTable;", null);
         cursor.moveToFirst();
         userName = cursor.getString(0);
+
         story.setBackgroundResource(R.drawable.school_background);
         this.chapter = storyListActivity.chapter;
         chapterText.setText("Prologue");
         dbHelper = new DBHelper(this);
-        database = dbHelper.getWritableDatabase();
-        database.rawQuery("SELECT * FROM chapterTable WHERE chapter_no ="+chapter+";",null);
+        db = dbHelper.getWritableDatabase();
+        db.rawQuery("SELECT * FROM chapterTable WHERE chapter_no ="+chapter+";",null);
         backBtn.setOnClickListener(backOnClickListener);
         //test code
-        macroClass = new MacroClass();
         inputText = getResources().openRawResource(prologueList[resNum++]);
         sc = new Scanner(inputText, "UTF-8");
         nameBox.setText(sc.nextLine());
@@ -75,7 +75,7 @@ public class Prologue extends AppCompatActivity {
                     inputText = getResources().openRawResource(prologueList[resNum++]);
                     sc = setScanner(inputText);
                 }else{
-                    database.execSQL("UPDATE userTable SET likability = 0");
+                    db.execSQL("UPDATE userTable SET play_chapter = 1");
                     endDlog = View.inflate(Prologue.this, R.layout.end_dlog, null);
                     endBtn = endDlog.findViewById(R.id.end_btn);
                     endBtn.setOnClickListener(new View.OnClickListener() {
@@ -85,12 +85,15 @@ public class Prologue extends AppCompatActivity {
                             startActivity(mainIntene);
                         }
                     });
+
                     endTitle = endDlog.findViewById(R.id.end_title);
                     endLikability = endDlog.findViewById(R.id.end_likability);
                     endTotal = endDlog.findViewById(R.id.end_total);
+
                     endTitle.setText("Prologue 클리어");
                     endLikability.setText("받은 호감도: 0");
                     endTotal.setText("총합 호감도: "+cursor.getString(1));
+
                     AlertDialog.Builder dlg = new AlertDialog.Builder(Prologue.this);
                     dlg.setView(endDlog);
                     dlg.setCancelable(false);
@@ -98,6 +101,10 @@ public class Prologue extends AppCompatActivity {
                 }
             }
         });
+        //데이터 베이스 close
+//        cursor.close();
+//        db.close();
+//        dbHelper.close();
 //        inputText = getResources().openRawResource(R.raw.prologue2);
 //        macroClass.storyMacro(inputText, characterImg, nameBox, chatBox, R.drawable.book_background, story);
 //        questionDlog = View.inflate(Prologue.this, R.layout.question_dlog, null);
@@ -119,17 +126,17 @@ public class Prologue extends AppCompatActivity {
                 break;
             case "C++":
                 characterImg.setImageResource(R.drawable.cpp);
-                nameBox.setText("박시플");
+                nameBox.setText("박시은");
                 break;
             case "C#":
                 characterImg.setImageResource(R.drawable.cs);
-                nameBox.setText("박시샵");
+                nameBox.setText("박시샤");
                 break;
             case "Python":
                 characterImg.setImageResource(R.drawable.py);
                 nameBox.setText("파이썬");
                 break;
-            case "백희진":
+            case "백희진": case "???":
                 characterImg.setImageResource(R.drawable.clear);
                 nameBox.setText(userName);
                 break;

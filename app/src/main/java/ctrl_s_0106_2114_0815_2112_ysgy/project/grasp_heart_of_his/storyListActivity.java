@@ -60,12 +60,25 @@ public class storyListActivity extends AppCompatActivity {
         };
         storyListView.setAdapter(storyAdapter);
         storyListView.setOnItemClickListener(stListener);
+
+        //데이터 베이스 close
+        cursor.close();
+        db.close();
+        dbHelper.close();
     }
     AdapterView.OnItemClickListener stListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int itmeChapter, long id) {
-            int finishCh = 2;
-            if(itmeChapter > finishCh) {
+            dbHelper = new DBHelper(storyListActivity.this);
+            db = dbHelper.getReadableDatabase();
+            Cursor cursor;
+            cursor = db.rawQuery("SELECT * FROM userTable;", null);
+            cursor.moveToFirst();
+            int finishCh = 1;
+            if(itmeChapter <= finishCh && itmeChapter > cursor.getInt(2)) {
+                Toast.makeText(getApplicationContext(),"아직 열리지 않았습니다. 앞에 스토리를 완료하세요.", Toast.LENGTH_SHORT).show();
+            }
+            else if(itmeChapter > finishCh){
                 Toast.makeText(getApplicationContext(),"업데이트 예정 입니다.", Toast.LENGTH_SHORT).show();
             }
             else {
@@ -73,6 +86,11 @@ public class storyListActivity extends AppCompatActivity {
                 Intent loadingStoryIntene = new Intent(getApplicationContext(), loadingStoryActivity.class);
                 startActivity(loadingStoryIntene);
             }
+
+            //데이터 베이스 close
+            cursor.close();
+            db.close();
+            dbHelper.close();
         }
     };
     public void setStoryList(Cursor cursor){
