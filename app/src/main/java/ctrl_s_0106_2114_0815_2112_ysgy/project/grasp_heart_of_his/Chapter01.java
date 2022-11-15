@@ -23,6 +23,7 @@ public class Chapter01 extends AppCompatActivity {
     DBHelper dbHelper;
     SQLiteDatabase database;
     int chapter, answer;
+    String userName;
     View questionDlog;
     LinearLayout story;
 
@@ -50,8 +51,37 @@ public class Chapter01 extends AppCompatActivity {
         questionDlog = View.inflate(Chapter01.this, R.layout.question_dlog, null);
         AlertDialog.Builder dlg = new AlertDialog.Builder(Chapter01.this);
     }
-
-    //InputStream inputText,
+    public void storyMacro(String name){
+        switch(name){
+            case "JAVA":
+                characterImg.setImageResource(R.drawable.java);
+                nameBox.setText("한자바");
+                break;
+            case "C":
+                characterImg.setImageResource(R.drawable.c);
+                nameBox.setText("박시언");
+                break;
+            case "C++":
+                characterImg.setImageResource(R.drawable.cpp);
+                nameBox.setText("박시은");
+                break;
+            case "C#":
+                characterImg.setImageResource(R.drawable.cs);
+                nameBox.setText("박시샤");
+                break;
+            case "Python":
+                characterImg.setImageResource(R.drawable.py);
+                nameBox.setText("파이썬");
+                break;
+            case "백희진": case "???":
+                characterImg.setImageResource(R.drawable.clear);
+                nameBox.setText(userName);
+                break;
+            default:
+                nameBox.setText(name);
+                break;
+        }
+    }
     public void auestionDlogMacro(View questionDialog, AlertDialog.Builder dlg){
         Button btn1 = questionDialog.findViewById(R.id.answer_1);
         dlg.setView(questionDialog);
