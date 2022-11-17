@@ -33,9 +33,9 @@ public class Chapter01 extends AppCompatActivity {
     AlertDialog.Builder qdlg;
     AlertDialog dialog;
     Toast toast;
-    int chapter, resNum=0, questionNum=0, nowChapter = 1,likabilityPoint, getLikabilityPoint = 0, playChapter;
+    int chapter, acount=0, resNum=0, questionNum=0, nowChapter = 1,likabilityPoint, getLikabilityPoint = 0, playChapter;
     int[] backgroundList = {R.drawable.main_background,R.drawable.school_background, R.drawable.book_background};
-    int[] chapter01List = {R.raw.chapter1_1, R.raw.chapter1_2, R.raw.chapter1_3, R.raw.chapter1_3q1, R.raw.chapter1_3q2};
+    int[] chapter01List = {R.raw.chapter1_1, R.raw.chapter1_2, R.raw.chapter1_3, R.raw.chapter1_3q1, R.raw.chapter1_3q2, R.raw.chapter1_4a3, R.raw.chapter1_4a2, R.raw.chapter1_4a1};
     int[][] answerLsit = {{2, 3},{3, 3}};
 
     @Override
@@ -74,7 +74,7 @@ public class Chapter01 extends AppCompatActivity {
                     chatBox.setText(sc.nextLine());
                 }
                 else if(resNum < chapter01List.length){
-                    if(resNum > 2){
+                    if(resNum > 2 && resNum<5){
                         questionDlog = View.inflate(Chapter01.this, R.layout.question_dlog, null);
                         qdlg = new AlertDialog.Builder(Chapter01.this);
                         inputText = getResources().openRawResource(chapter01List[resNum++]);
@@ -99,12 +99,18 @@ public class Chapter01 extends AppCompatActivity {
                                     toast = Toast.makeText(getApplicationContext(),"정답입니다! ♡+"+answerLsit[1][questionNum++],Toast.LENGTH_SHORT);
                                     toast.setGravity(Gravity.CENTER,Gravity.CENTER,Gravity.CENTER);
                                     toast.show();
+                                    nameBox.setText(scA.nextLine());
+                                    chatBox.setText(scA.nextLine());
+                                    acount++;
                                     dialog.dismiss();
                                 }
                                 else{
                                     toast = Toast.makeText(getApplicationContext(),"틀렸습니다.. (답 : "+(answerLsit[0][questionNum++])+") ♡+"+0,Toast.LENGTH_SHORT);
                                     toast.setGravity(Gravity.CENTER,Gravity.CENTER,Gravity.CENTER);
                                     toast.show();
+                                    String in;
+                                    in = scA.nextLine();
+                                    in = scA.nextLine();
                                     dialog.dismiss();
                                 }
                             }
@@ -117,11 +123,18 @@ public class Chapter01 extends AppCompatActivity {
                                     toast = Toast.makeText(getApplicationContext(),"정답입니다! ♡+"+answerLsit[1][questionNum++],Toast.LENGTH_SHORT);
                                     toast.setGravity(Gravity.CENTER,Gravity.CENTER,Gravity.CENTER);
                                     toast.show();
+                                    nameBox.setText(scA.nextLine());
+                                    chatBox.setText(scA.nextLine());
+                                    acount++;
                                     dialog.dismiss();
                                 }
                                 else{
+                                    toast = Toast.makeText(getApplicationContext(),"틀렸습니다.. (답 : "+(answerLsit[0][questionNum++])+") ♡+"+0,Toast.LENGTH_SHORT);
                                     toast.setGravity(Gravity.CENTER,Gravity.CENTER,Gravity.CENTER);
                                     toast.show();
+                                    String in;
+                                    in = scA.nextLine();
+                                    in = scA.nextLine();
                                     dialog.dismiss();
                                 }
                             }
@@ -134,20 +147,35 @@ public class Chapter01 extends AppCompatActivity {
                                     toast = Toast.makeText(getApplicationContext(),"정답입니다! ♡+"+answerLsit[1][questionNum++],Toast.LENGTH_SHORT);
                                     toast.setGravity(Gravity.CENTER,Gravity.CENTER,Gravity.CENTER);
                                     toast.show();
+                                    nameBox.setText(scA.nextLine());
+                                    chatBox.setText(scA.nextLine());
+                                    acount++;
                                     dialog.dismiss();
                                 }
                                 else{
+                                    toast = Toast.makeText(getApplicationContext(),"틀렸습니다.. (답 : "+(answerLsit[0][questionNum++])+") ♡+"+0,Toast.LENGTH_SHORT);
                                     toast.setGravity(Gravity.CENTER,Gravity.CENTER,Gravity.CENTER);
                                     toast.show();
+                                    String in;
+                                    in = scA.nextLine();
+                                    in = scA.nextLine();
+                                    nameBox.setText(scA.nextLine());
+                                    chatBox.setText(scA.nextLine());
                                     dialog.dismiss();
                                 }
                             }
                         });
                     }
                     else {
-                        story.setBackgroundResource(backgroundList[resNum]);
-                        inputText = getResources().openRawResource(chapter01List[resNum++]);
-                        sc = setScanner(inputText);
+                        if(resNum>=5){
+                            inputText = getResources().openRawResource(chapter01List[resNum+acount]);
+                            sc = setScanner(inputText);
+                            resNum = chapter01List.length ;
+                        }else{
+                            story.setBackgroundResource(backgroundList[resNum]);
+                            inputText = getResources().openRawResource(chapter01List[resNum++]);
+                            sc = setScanner(inputText);
+                        }
                     }
                 }else {
                     db.execSQL("UPDATE userTable SET play_chapter = 2");
