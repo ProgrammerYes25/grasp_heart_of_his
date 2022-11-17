@@ -72,9 +72,16 @@ public class diaryListActivity extends AppCompatActivity {
     AdapterView.OnItemClickListener diItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int day, long id) {
+            dbHelper = new DBHelper(diaryListActivity.this);
+            db = dbHelper.getReadableDatabase();
+            Cursor cursor;
+            cursor = db.rawQuery("SELECT * FROM userTable;", null);
+            cursor.moveToFirst();
             int finishDay = 1;
-            if(day+1 > finishDay){
-                Toast.makeText(getApplicationContext(), "업데이트 예정 입니다.",Toast.LENGTH_SHORT).show();
+            if(day+1 <= finishDay && day+1> cursor.getInt(2)){
+                Toast.makeText(getApplicationContext(),"아직 열리지 않았습니다. 앞에 스토리를 완료하세요.", Toast.LENGTH_SHORT).show();
+            }else if(day+1 > finishDay){
+                Toast.makeText(getApplicationContext(),"업데이트 예정 입니다.", Toast.LENGTH_SHORT).show();
             }
             else {
                 diaryListActivity.day = day;
@@ -84,6 +91,7 @@ public class diaryListActivity extends AppCompatActivity {
         }
     };
     public void setDiaryList(Cursor cursor){
+        cursor.moveToNext();
         while (cursor.moveToNext()) {
             diaryList.add("D+" + cursor.getInt(0)+"Day");
         }

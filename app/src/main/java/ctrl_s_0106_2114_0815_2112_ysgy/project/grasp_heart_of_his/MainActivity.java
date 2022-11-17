@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(storyListIntene);
             }
         });
-
         diaryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,9 +47,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //데이터 베이스 close
-        cursor.close();
-        db.close();
-        dbHelper.close();
+//        cursor.close();
+//        db.close();
     }
     public void setUsername(Cursor cursor){
         if(!(cursor.moveToNext())){

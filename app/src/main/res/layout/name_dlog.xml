@@ -17,6 +17,11 @@
         android:id="@+id/edit_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="8pt"
+        android:padding="10dp"
+        android:background="#FFDDDD"
         android:hint="이름은 입력하세요."
         android:textColor="@color/black"/>
     <Button

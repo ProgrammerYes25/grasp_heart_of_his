@@ -56,8 +56,8 @@ public class Prologue extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();
         db.rawQuery("SELECT * FROM chapterTable WHERE chapter_no ="+chapter+";",null);
+
         backBtn.setOnClickListener(backOnClickListener);
-        //test code
         inputText = getResources().openRawResource(prologueList[resNum++]);
         sc = new Scanner(inputText, "UTF-8");
         nameBox.setText(sc.nextLine());
@@ -90,9 +90,9 @@ public class Prologue extends AppCompatActivity {
                     endLikability = endDlog.findViewById(R.id.end_likability);
                     endTotal = endDlog.findViewById(R.id.end_total);
 
-                    endTitle.setText("Prologue 클리어");
-                    endLikability.setText("받은 호감도: 0");
-                    endTotal.setText("총합 호감도: "+cursor.getString(1));
+                    endTitle.setText("♠Prologue 클리어♠");
+                    endLikability.setText("♡ 받은 호감도: 0");
+                    endTotal.setText("♥ 총합 호감도: "+cursor.getString(1));
 
                     AlertDialog.Builder dlg = new AlertDialog.Builder(Prologue.this);
                     dlg.setView(endDlog);
