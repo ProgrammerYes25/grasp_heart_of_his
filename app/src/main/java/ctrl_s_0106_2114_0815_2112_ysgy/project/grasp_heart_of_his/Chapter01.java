@@ -35,7 +35,7 @@ public class Chapter01 extends AppCompatActivity {
     Toast toast;
     int chapter, acount=0, resNum=0, questionNum=0, nowChapter = 1,likabilityPoint, getLikabilityPoint = 0, playChapter;
     int[] backgroundList = {R.drawable.main_background,R.drawable.school_background, R.drawable.book_background};
-    int[] chapter01List = {R.raw.chapter1_1, R.raw.chapter1_2, R.raw.chapter1_3, R.raw.chapter1_3q1, R.raw.chapter1_3q2, R.raw.chapter1_4a3, R.raw.chapter1_4a2, R.raw.chapter1_4a1};
+    int[] chapter01List = {R.raw.chapter01_1, R.raw.chapter01_2, R.raw.chapter01_3, R.raw.chapter01_3q1, R.raw.chapter01_3q2, R.raw.chapter01_3a3, R.raw.chapter01_3a2, R.raw.chapter01_3a1};
     int[][] answerLsit = {{2, 3},{3, 3}};
 
     @Override
@@ -71,7 +71,11 @@ public class Chapter01 extends AppCompatActivity {
                 if(sc.hasNextLine()){
                     String name = sc.nextLine();
                     storyMacro(name);
-                    chatBox.setText(sc.nextLine());
+                    String text = sc.nextLine();
+                    if(text.equals("자기소개")){
+                       text =  "어? 어? 나는 "+userName+"(이)라고 해 반가워!!";
+                    }
+                    chatBox.setText(text);
                 }
                 else if(resNum < chapter01List.length){
                     if(resNum > 2 && resNum<5){
@@ -207,6 +211,7 @@ public class Chapter01 extends AppCompatActivity {
                 }
             }
         });
+        db.close();
 //        //test code
 //        InputStream inputText = getResources().openRawResource(R.raw.test);
 //        //macroClass.storyMacro(inputText, characterImg, nameBox, chatBox);

@@ -103,7 +103,7 @@ public class Prologue extends AppCompatActivity {
         });
         //데이터 베이스 close
 //        cursor.close();
-//        db.close();
+        db.close();
 //        dbHelper.close();
 //        inputText = getResources().openRawResource(R.raw.prologue2);
 //        macroClass.storyMacro(inputText, characterImg, nameBox, chatBox, R.drawable.book_background, story);

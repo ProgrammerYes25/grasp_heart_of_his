@@ -8,15 +8,36 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class DiaryActivity extends AppCompatActivity {
     Button backBtn;
+    EditText diaryText;
+    InputStream inputText;
+    Scanner sc;
+    String diaryString;
+    int[] diaryList = {R.raw.chapter01_diary};
+    int day;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary);
         backBtn = findViewById(R.id.back_btn);
+        diaryText = findViewById(R.id.diary_text);
         backBtn.setOnClickListener(backOnClickListener);
+        day = diaryListActivity.day;
+        inputText =getResources().openRawResource(diaryList[day]);
+        sc = new Scanner(inputText, "UTF-8");
+        diaryString = "";
+        while (sc.hasNextLine()){
+            diaryString += (sc.nextLine()+"\n");
+        }
+        diaryText.setText(diaryString);
+
     }
     View.OnClickListener backOnClickListener = new View.OnClickListener() {
         @Override

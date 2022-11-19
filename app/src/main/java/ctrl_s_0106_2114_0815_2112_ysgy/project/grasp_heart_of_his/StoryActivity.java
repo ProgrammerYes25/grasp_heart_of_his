@@ -40,7 +40,7 @@ public class StoryActivity extends AppCompatActivity {
         backBtn.setOnClickListener(backOnClickListener);
         //test code
         MacroClass macroClass = new MacroClass();
-        InputStream inputText = getResources().openRawResource(R.raw.test);
+        InputStream inputText = getResources().openRawResource(R.raw.chapter01_tip);
         //macroClass.storyMacro(inputText, characterImg, nameBox, chatBox);
         questionDlog = View.inflate(StoryActivity.this, R.layout.question_dlog, null);
         AlertDialog.Builder dlg = new AlertDialog.Builder(StoryActivity.this);

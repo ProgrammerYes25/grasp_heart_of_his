@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor;
         cursor = db.rawQuery("SELECT * FROM userTable;", null);
         setUsername(cursor);
-        likabilityText.setText(Integer.toString(cursor.getInt(1)));
         storyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //데이터 베이스 close
-//        cursor.close();
-//        db.close();
+        //db.close();
     }
     public void setUsername(Cursor cursor){
         if(!(cursor.moveToNext())){
@@ -68,7 +66,11 @@ public class MainActivity extends AppCompatActivity {
                     checkDlg.setPositiveButton("계속하기", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            db.execSQL("INSERT INTO userTable VALUES('"+editName.getText().toString()+"',"+ 0+","+ 0+");");
+                            String name = editName.getText().toString();
+                            if(name.equals("")){
+                                name = "백희진";
+                            }
+                            db.execSQL("INSERT INTO userTable VALUES('"+name+"',"+ 0+","+ 0+");");
                             Intent mainIntene = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(mainIntene);
                         }
@@ -82,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
             dlg.setView(nameDlog);
             dlg.setCancelable(false);
             dlg.show();
+        }else {
+            cursor.moveToFirst();
+            likabilityText.setText(Integer.toString(cursor.getInt(1)));
         }
     }
 }

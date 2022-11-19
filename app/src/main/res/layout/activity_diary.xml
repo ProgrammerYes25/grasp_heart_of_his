@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
-    android:background="#DD353D4A"
+    android:background="#DD9BC3FF"
     android:orientation="vertical"
     tools:context=".DiaryActivity">
     <LinearLayout
@@ -22,7 +22,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:background="#FFF9E7"
                 android:text="이 세계에 온지 D+1Day"
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
@@ -39,17 +38,22 @@
                 android:background="@drawable/name_btn"
                 />
         </RelativeLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:background="#FFF9E7"
-            android:layout_marginLeft="20dp"
-            android:text="일기가 들어 올 자리 입니다."
-            android:textSize="10pt"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:gravity="center_vertical"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <EditText
+                android:id="@+id/diary_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:layout_marginLeft="20dp"
+                android:text="일기가 들어 올 자리 입니다."
+                android:textSize="10pt"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"/>
+        </ScrollView>
+
     </LinearLayout>
 
 </LinearLayout>

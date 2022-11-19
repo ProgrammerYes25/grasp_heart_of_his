@@ -68,7 +68,7 @@ public class MacroClass extends AppCompatActivity {
 
     public void loadingStoryMacro(InputStream inputText, Button tipBtn){
         Scanner sc = new Scanner(inputText, "UTF-8");
-        tipBtn.setText(sc.next());
+        tipBtn.setText(sc.nextLine());
     }
 
 }
