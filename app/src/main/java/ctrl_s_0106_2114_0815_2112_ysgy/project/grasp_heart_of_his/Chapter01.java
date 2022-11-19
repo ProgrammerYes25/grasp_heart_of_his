@@ -53,8 +53,8 @@ public class Chapter01 extends AppCompatActivity {
         chapterText.setText("Chapter "+chapter);
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();
-        db.rawQuery("SELECT * FROM chapterTable WHERE chapter_no ="+chapter+";",null);
         Cursor cursor;
+        //cursor = db.rawQuery("SELECT * FROM chapterTable WHERE chapter_no ="+chapter+";",null);
         cursor = db.rawQuery("SELECT * FROM userTable;", null);
         cursor.moveToFirst();
         userName = cursor.getString(0);
@@ -135,6 +135,8 @@ public class Chapter01 extends AppCompatActivity {
                                     String in;
                                     in = scA.nextLine();
                                     in = scA.nextLine();
+                                    nameBox.setText(scA.nextLine());
+                                    chatBox.setText(scA.nextLine());
                                     dialog.dismiss();
                                 }
                             }
@@ -195,7 +197,7 @@ public class Chapter01 extends AppCompatActivity {
                     db.execSQL("UPDATE userTable SET likability = '"+(likabilityPoint+getLikabilityPoint)+"';");
                     db.execSQL("UPDATE chapterTable SET total_likability = '"+getLikabilityPoint+"' WHERE chapter_no = '"+nowChapter+"';");
                     endTitle.setText("♠Prologue 클리어♠");
-                    endLikability.setText("♡ 받은 호감도: "+getLikabilityPoint);
+                    endLikability.setText("♥ 받은 호감도: "+getLikabilityPoint);
                     endTotal.setText("♥ 총합 호감도: "+(likabilityPoint+getLikabilityPoint));
 
                     AlertDialog.Builder dlg = new AlertDialog.Builder(Chapter01.this);
@@ -220,7 +222,7 @@ public class Chapter01 extends AppCompatActivity {
     public void storyMacro(String name){
         switch(name){
             case "한자바":
-                characterImg.setImageResource(R.drawable.java);
+                characterImg.setImageResource(R.drawable.java1);
                 nameBox.setText("한자바");
                 break;
             case "박시언":
@@ -259,11 +261,12 @@ public class Chapter01 extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if(nowChapter<playChapter){
-                        db.execSQL("UPDATE userTable SET likability = '"+0+"';");
-                        Cursor cursorPoint= db.rawQuery("SELECT * FROM chapterTable WHERE chapter_no = "+nowChapter+";", null);
+                        Cursor cursorPoint = db.rawQuery("SELECT * FROM userTable;", null);
                         cursorPoint.moveToFirst();
-                        int likability = cursorPoint.getInt(1);
-                        db.execSQL("UPDATE userTable SET likability = '"+likability+"';");
+                        int Likability = cursorPoint.getInt(1);
+                        cursorPoint = db.rawQuery("SELECT * FROM chapterTable WHERE chapter_no = "+nowChapter+";", null);
+                        cursorPoint.moveToFirst();
+                        db.execSQL("UPDATE userTable SET likability = '"+(Likability+cursorPoint.getInt(1))+"';");
                     }
                     Intent backIntent = new Intent(getApplicationContext(),storyListActivity.class);
                     startActivity(backIntent);

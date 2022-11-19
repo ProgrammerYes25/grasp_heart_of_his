@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     ImageView storyBtn, diaryBtn;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     View nameDlog;
     Button saveNameBtn;
     EditText editName;
+    TextView likabilityText;
     AlertDialog.Builder checkDlg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +29,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         storyBtn = findViewById(R.id.story_btn);
         diaryBtn = findViewById(R.id.diary_btn);
+        likabilityText = findViewById(R.id.likability_text);
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();
         Cursor cursor;
         cursor = db.rawQuery("SELECT * FROM userTable;", null);
         setUsername(cursor);
+        likabilityText.setText(Integer.toString(cursor.getInt(1)));
         storyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

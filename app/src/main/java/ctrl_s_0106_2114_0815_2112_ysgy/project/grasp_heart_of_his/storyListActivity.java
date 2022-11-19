@@ -82,7 +82,7 @@ public class storyListActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"업데이트 예정 입니다.", Toast.LENGTH_SHORT).show();
             }
             else {
-                if(itmeChapter < cursor.getInt(2) && cursor.getInt(1) > 0){
+                if(itmeChapter < cursor.getInt(2)){
                     Cursor cursorPoint= db.rawQuery("SELECT * FROM chapterTable WHERE chapter_no = "+itmeChapter+";", null);
                     cursorPoint.moveToFirst();
                     int likability = cursorPoint.getInt(1);
