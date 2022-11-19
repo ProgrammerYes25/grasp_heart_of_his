@@ -94,6 +94,7 @@ public class storyListActivity extends AppCompatActivity {
                 storyListActivity.chapter = itmeChapter;
                 Intent loadingStoryIntene = new Intent(getApplicationContext(), loadingStoryActivity.class);
                 startActivity(loadingStoryIntene);
+                //db.close();
             }
 
             //데이터 베이스 close

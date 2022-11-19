@@ -63,9 +63,6 @@ public class diaryListActivity extends AppCompatActivity {
                 return view;
             }
         };
-//        if(diaryList.equals(null)) {
-//            guideText.setText("스토리 진행시 해금됩니다.");
-//        }
         diaryListView.setAdapter(diaryAdapter);
         diaryListView.setOnItemClickListener(diItemClickListener);
     }

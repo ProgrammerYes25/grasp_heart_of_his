@@ -208,10 +208,11 @@ public class Chapter01 extends AppCompatActivity {
                     dlg.setView(endDlog);
                     dlg.setCancelable(false);
                     dlg.show();
+                    //db.close();
                 }
             }
         });
-        db.close();
+
 //        //test code
 //        InputStream inputText = getResources().openRawResource(R.raw.test);
 //        //macroClass.storyMacro(inputText, characterImg, nameBox, chatBox);

@@ -91,19 +91,19 @@ public class Prologue extends AppCompatActivity {
                     endTotal = endDlog.findViewById(R.id.end_total);
 
                     endTitle.setText("♠Prologue 클리어♠");
-                    endLikability.setText("♡ 받은 호감도: 0");
+                    endLikability.setText("♥ 받은 호감도: 0");
                     endTotal.setText("♥ 총합 호감도: "+cursor.getString(1));
 
                     AlertDialog.Builder dlg = new AlertDialog.Builder(Prologue.this);
                     dlg.setView(endDlog);
                     dlg.setCancelable(false);
                     dlg.show();
+                    //db.close();
                 }
             }
         });
         //데이터 베이스 close
 //        cursor.close();
-        db.close();
 //        dbHelper.close();
 //        inputText = getResources().openRawResource(R.raw.prologue2);
 //        macroClass.storyMacro(inputText, characterImg, nameBox, chatBox, R.drawable.book_background, story);
