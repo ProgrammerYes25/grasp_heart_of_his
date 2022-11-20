@@ -40,7 +40,7 @@ public class diaryListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent backIntent = new Intent(getApplicationContext(), MainActivity.class);
-                setResult(RESULT_OK, backIntent);
+                startActivity(backIntent);
                 finish();
             }
         });
@@ -78,7 +78,7 @@ public class diaryListActivity extends AppCompatActivity {
             cursor = db.rawQuery("SELECT * FROM userTable;", null);
             cursor.moveToFirst();
             int finishDay = 1;
-            if(day+1 <= finishDay && day+1> cursor.getInt(2)){
+            if(day+1 <= finishDay && day+1> cursor.getInt(2)-1){
                 Toast.makeText(getApplicationContext(),"아직 열리지 않았습니다. 앞에 스토리를 완료하세요.", Toast.LENGTH_SHORT).show();
             }else if(day+1 > finishDay){
                 Toast.makeText(getApplicationContext(),"업데이트 예정 입니다.", Toast.LENGTH_SHORT).show();

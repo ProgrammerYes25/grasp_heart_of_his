@@ -1,7 +1,9 @@
 package ctrl_s_0106_2114_0815_2112_ysgy.project.grasp_heart_of_his;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -82,16 +84,29 @@ public class storyListActivity extends AppCompatActivity {
             else if(itmeChapter > finishCh){
                 Toast.makeText(getApplicationContext(),"업데이트 예정 입니다.", Toast.LENGTH_SHORT).show();
             }
+            else if(itmeChapter < cursor.getInt(2)) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(storyListActivity.this);
+                dlg.setMessage("이 챕터에서 받은 호감도를 리셋하고 이 시간대로 돌아가 다시 이야기를 합니다.");
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Cursor cursorPoint = db.rawQuery("SELECT * FROM chapterTable WHERE chapter_no = " + itmeChapter + ";", null);
+                        cursorPoint.moveToFirst();
+                        int likability = cursorPoint.getInt(1);
+                        cursorPoint = db.rawQuery("SELECT * FROM userTable;", null);
+                        cursorPoint.moveToFirst();
+                        int totLikability = cursorPoint.getInt(1);
+                        db.execSQL("UPDATE userTable SET likability = '" + (totLikability - likability) + "';");
+                        storyListActivity.chapter = itmeChapter;
+                        Intent loadingStoryIntene = new Intent(getApplicationContext(), loadingStoryActivity.class);
+                        startActivity(loadingStoryIntene);
+                    }
+                });
+                dlg.setNegativeButton("취소", null);
+                dlg.setCancelable(false);
+                dlg.show();
+            }
             else {
-                if(itmeChapter < cursor.getInt(2)){
-                    Cursor cursorPoint= db.rawQuery("SELECT * FROM chapterTable WHERE chapter_no = "+itmeChapter+";", null);
-                    cursorPoint.moveToFirst();
-                    int likability = cursorPoint.getInt(1);
-                    cursorPoint= db.rawQuery("SELECT * FROM userTable;", null);
-                    cursorPoint.moveToFirst();
-                    int totLikability = cursorPoint.getInt(1);
-                    db.execSQL("UPDATE userTable SET likability = '"+(totLikability-likability)+"';");
-                }
                 storyListActivity.chapter = itmeChapter;
                 Intent loadingStoryIntene = new Intent(getApplicationContext(), loadingStoryActivity.class);
                 startActivity(loadingStoryIntene);

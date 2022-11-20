@@ -30,7 +30,8 @@ public class DiaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_diary);
         backBtn = findViewById(R.id.back_btn);
         diaryText = findViewById(R.id.diary_text);
-        diaryPlayer = MediaPlayer.create(this, R.raw.elgar_salut_damour_op12_elgar1929);
+        diaryPlayer = MediaPlayer.create(this, R.raw.diary_mp3);
+        diaryPlayer.setLooping(true);
         diaryPlayer.start();
         backBtn.setOnClickListener(backOnClickListener);
         day = diaryListActivity.day;
@@ -41,7 +42,6 @@ public class DiaryActivity extends AppCompatActivity {
             diaryString += (sc.nextLine()+"\n");
         }
         diaryText.setText(diaryString);
-
     }
     View.OnClickListener backOnClickListener = new View.OnClickListener() {
         @Override
@@ -53,7 +53,7 @@ public class DiaryActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     diaryPlayer.stop();
                     Intent backIntent = new Intent(getApplicationContext(), diaryListActivity.class);
-                    setResult(RESULT_OK, backIntent);
+                    startActivity(backIntent);
                     finish();
                 }
             });

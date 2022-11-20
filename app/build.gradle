@@ -9,8 +9,8 @@ android {
         applicationId "ctrl_s_0106_2114_0815_2112_ysgy.project.grasp_heart_of_his"
         minSdk 21
         targetSdk 32
-        versionCode 4
-        versionName "1.3"
+        versionCode 7
+        versionName "1.6"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

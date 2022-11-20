@@ -50,7 +50,8 @@ public class Chapter01 extends AppCompatActivity {
         nameBox = findViewById(R.id.name_box);
         backBtn = findViewById(R.id.back_btn);
         story = findViewById(R.id.story_layout);
-        chapter01Player = MediaPlayer.create(this, R.raw.elgar_pomp_and_circumstance_op39_1_elgar1932_track01);
+        chapter01Player = MediaPlayer.create(this, R.raw.chat_mp3);
+        chapter01Player.setLooping(true);
         chapter01Player.start();
         story.setBackgroundResource(R.drawable.main_background);
         this.chapter = storyListActivity.chapter;
@@ -84,6 +85,10 @@ public class Chapter01 extends AppCompatActivity {
                 else if(resNum < chapter01List.length){
                     if(resNum > 2 && resNum<5){
                         chatBox.setClickable(false);
+                        chapter01Player.stop();
+                        chapter01Player = MediaPlayer.create(Chapter01.this, R.raw.question_mp3);
+                        chapter01Player.setLooping(true);
+                        chapter01Player.start();
                         questionDlog = View.inflate(Chapter01.this, R.layout.question_dlog, null);
                         qdlg = new AlertDialog.Builder(Chapter01.this);
                         inputText = getResources().openRawResource(chapter01List[resNum++]);
@@ -113,6 +118,10 @@ public class Chapter01 extends AppCompatActivity {
                                     acount++;
                                     dialog.dismiss();
                                     chatBox.setClickable(true);
+                                    chapter01Player.stop();
+                                    chapter01Player = MediaPlayer.create(Chapter01.this, R.raw.chat_mp3);
+                                    chapter01Player.setLooping(true);
+                                    chapter01Player.start();
                                 }
                                 else{
                                     toast = Toast.makeText(getApplicationContext(),"틀렸습니다.. (답 : "+(answerLsit[0][questionNum++])+") ♡+"+0,Toast.LENGTH_SHORT);
@@ -125,6 +134,10 @@ public class Chapter01 extends AppCompatActivity {
                                     chatBox.setText(scA.nextLine());
                                     dialog.dismiss();
                                     chatBox.setClickable(true);
+                                    chapter01Player.stop();
+                                    chapter01Player = MediaPlayer.create(Chapter01.this, R.raw.chat_mp3);
+                                    chapter01Player.setLooping(true);
+                                    chapter01Player.start();
                                 }
                             }
                         });
@@ -141,6 +154,10 @@ public class Chapter01 extends AppCompatActivity {
                                     acount++;
                                     dialog.dismiss();
                                     chatBox.setClickable(true);
+                                    chapter01Player.stop();
+                                    chapter01Player = MediaPlayer.create(Chapter01.this, R.raw.chat_mp3);
+                                    chapter01Player.setLooping(true);
+                                    chapter01Player.start();
                                 }
                                 else{
                                     toast = Toast.makeText(getApplicationContext(),"틀렸습니다.. (답 : "+(answerLsit[0][questionNum++])+") ♡+"+0,Toast.LENGTH_SHORT);
@@ -153,6 +170,10 @@ public class Chapter01 extends AppCompatActivity {
                                     chatBox.setText(scA.nextLine());
                                     dialog.dismiss();
                                     chatBox.setClickable(true);
+                                    chapter01Player.stop();
+                                    chapter01Player = MediaPlayer.create(Chapter01.this, R.raw.chat_mp3);
+                                    chapter01Player.setLooping(true);
+                                    chapter01Player.start();
                                 }
                             }
                         });
@@ -169,6 +190,10 @@ public class Chapter01 extends AppCompatActivity {
                                     acount++;
                                     dialog.dismiss();
                                     chatBox.setClickable(true);
+                                    chapter01Player.stop();
+                                    chapter01Player = MediaPlayer.create(Chapter01.this, R.raw.chat_mp3);
+                                    chapter01Player.setLooping(true);
+                                    chapter01Player.start();
                                 }
                                 else{
                                     toast = Toast.makeText(getApplicationContext(),"틀렸습니다.. (답 : "+(answerLsit[0][questionNum++])+") ♡+"+0,Toast.LENGTH_SHORT);
@@ -181,6 +206,10 @@ public class Chapter01 extends AppCompatActivity {
                                     chatBox.setText(scA.nextLine());
                                     dialog.dismiss();
                                     chatBox.setClickable(true);
+                                    chapter01Player.stop();
+                                    chapter01Player = MediaPlayer.create(Chapter01.this, R.raw.chat_mp3);
+                                    chapter01Player.setLooping(true);
+                                    chapter01Player.start();
                                 }
                             }
                         });

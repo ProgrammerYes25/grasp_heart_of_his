@@ -44,7 +44,8 @@ public class Prologue extends AppCompatActivity {
         nameBox = findViewById(R.id.name_box);
         backBtn = findViewById(R.id.back_btn);
         story = findViewById(R.id.story_layout);
-        prologuePlayer = MediaPlayer.create(this, R.raw.elgar_pomp_and_circumstance_op39_1_elgar1932_track01);
+        prologuePlayer = MediaPlayer.create(this, R.raw.chat_mp3);
+        prologuePlayer.setLooping(true);
         prologuePlayer.start();
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();

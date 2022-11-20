@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         storyBtn = findViewById(R.id.story_btn);
         diaryBtn = findViewById(R.id.diary_btn);
-        mainPlayer = MediaPlayer.create(this, R.raw.bolero);
+        mainPlayer = MediaPlayer.create(this, R.raw.main_mp3);
+        mainPlayer.setLooping(true);
         mainPlayer.start();
         likabilityText = findViewById(R.id.likability_text);
         dbHelper = new DBHelper(this);
