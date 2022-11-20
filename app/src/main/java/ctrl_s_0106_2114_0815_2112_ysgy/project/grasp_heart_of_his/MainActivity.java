@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     ImageView storyBtn, diaryBtn;
+    MediaPlayer mainPlayer;
     DBHelper dbHelper;
     SQLiteDatabase db;
     View nameDlog;
@@ -23,12 +25,15 @@ public class MainActivity extends AppCompatActivity {
     EditText editName;
     TextView likabilityText;
     AlertDialog.Builder checkDlg;
+    AlertDialog alertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         storyBtn = findViewById(R.id.story_btn);
         diaryBtn = findViewById(R.id.diary_btn);
+        mainPlayer = MediaPlayer.create(this, R.raw.bolero);
+        mainPlayer.start();
         likabilityText = findViewById(R.id.likability_text);
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         storyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mainPlayer.stop();
                 Intent storyListIntene = new Intent(getApplicationContext(), storyListActivity.class);
                 startActivity(storyListIntene);
             }
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         diaryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mainPlayer.stop();
                 Intent diaryListIntene = new Intent(getApplicationContext(), diaryListActivity.class);
                 startActivity(diaryListIntene);
             }
@@ -71,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
                                 name = "백희진";
                             }
                             db.execSQL("INSERT INTO userTable VALUES('"+name+"',"+ 0+","+ 0+");");
-                            Intent mainIntene = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(mainIntene);
+                            alertDialog.dismiss();
                         }
                     });
                     checkDlg.setNegativeButton("다시확인", null);
@@ -83,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
             dlg.setView(nameDlog);
             dlg.setCancelable(false);
-            dlg.show();
+            alertDialog = dlg.create();
+            alertDialog.show();
         }else {
             cursor.moveToFirst();
             likabilityText.setText(Integer.toString(cursor.getInt(1)));

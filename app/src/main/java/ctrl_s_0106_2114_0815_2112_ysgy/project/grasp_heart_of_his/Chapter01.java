@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -26,6 +27,7 @@ public class Chapter01 extends AppCompatActivity {
     DBHelper dbHelper;
     SQLiteDatabase db;
     View endDlog, questionDlog;
+    MediaPlayer chapter01Player;
     LinearLayout story;
     InputStream inputText;
     String userName;
@@ -48,6 +50,8 @@ public class Chapter01 extends AppCompatActivity {
         nameBox = findViewById(R.id.name_box);
         backBtn = findViewById(R.id.back_btn);
         story = findViewById(R.id.story_layout);
+        chapter01Player = MediaPlayer.create(this, R.raw.elgar_pomp_and_circumstance_op39_1_elgar1932_track01);
+        chapter01Player.start();
         story.setBackgroundResource(R.drawable.main_background);
         this.chapter = storyListActivity.chapter;
         chapterText.setText("Chapter "+chapter);
@@ -79,6 +83,7 @@ public class Chapter01 extends AppCompatActivity {
                 }
                 else if(resNum < chapter01List.length){
                     if(resNum > 2 && resNum<5){
+                        chatBox.setClickable(false);
                         questionDlog = View.inflate(Chapter01.this, R.layout.question_dlog, null);
                         qdlg = new AlertDialog.Builder(Chapter01.this);
                         inputText = getResources().openRawResource(chapter01List[resNum++]);
@@ -107,6 +112,7 @@ public class Chapter01 extends AppCompatActivity {
                                     chatBox.setText(scA.nextLine());
                                     acount++;
                                     dialog.dismiss();
+                                    chatBox.setClickable(true);
                                 }
                                 else{
                                     toast = Toast.makeText(getApplicationContext(),"틀렸습니다.. (답 : "+(answerLsit[0][questionNum++])+") ♡+"+0,Toast.LENGTH_SHORT);
@@ -115,7 +121,10 @@ public class Chapter01 extends AppCompatActivity {
                                     String in;
                                     in = scA.nextLine();
                                     in = scA.nextLine();
+                                    nameBox.setText(scA.nextLine());
+                                    chatBox.setText(scA.nextLine());
                                     dialog.dismiss();
+                                    chatBox.setClickable(true);
                                 }
                             }
                         });
@@ -131,6 +140,7 @@ public class Chapter01 extends AppCompatActivity {
                                     chatBox.setText(scA.nextLine());
                                     acount++;
                                     dialog.dismiss();
+                                    chatBox.setClickable(true);
                                 }
                                 else{
                                     toast = Toast.makeText(getApplicationContext(),"틀렸습니다.. (답 : "+(answerLsit[0][questionNum++])+") ♡+"+0,Toast.LENGTH_SHORT);
@@ -142,6 +152,7 @@ public class Chapter01 extends AppCompatActivity {
                                     nameBox.setText(scA.nextLine());
                                     chatBox.setText(scA.nextLine());
                                     dialog.dismiss();
+                                    chatBox.setClickable(true);
                                 }
                             }
                         });
@@ -157,6 +168,7 @@ public class Chapter01 extends AppCompatActivity {
                                     chatBox.setText(scA.nextLine());
                                     acount++;
                                     dialog.dismiss();
+                                    chatBox.setClickable(true);
                                 }
                                 else{
                                     toast = Toast.makeText(getApplicationContext(),"틀렸습니다.. (답 : "+(answerLsit[0][questionNum++])+") ♡+"+0,Toast.LENGTH_SHORT);
@@ -168,6 +180,7 @@ public class Chapter01 extends AppCompatActivity {
                                     nameBox.setText(scA.nextLine());
                                     chatBox.setText(scA.nextLine());
                                     dialog.dismiss();
+                                    chatBox.setClickable(true);
                                 }
                             }
                         });
@@ -190,11 +203,13 @@ public class Chapter01 extends AppCompatActivity {
                     endBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            chapter01Player.stop();
                             Intent mainIntene = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(mainIntene);
+                            setResult(RESULT_OK, mainIntene);
+                            finish();
                         }
                     });
-
+                    chatBox.setClickable(false);
                     endTitle = endDlog.findViewById(R.id.end_title);
                     endLikability = endDlog.findViewById(R.id.end_likability);
                     endTotal = endDlog.findViewById(R.id.end_total);
@@ -203,7 +218,6 @@ public class Chapter01 extends AppCompatActivity {
                     endTitle.setText("♠Prologue 클리어♠");
                     endLikability.setText("♥ 받은 호감도: "+getLikabilityPoint);
                     endTotal.setText("♥ 총합 호감도: "+(likabilityPoint+getLikabilityPoint));
-
                     AlertDialog.Builder dlg = new AlertDialog.Builder(Chapter01.this);
                     dlg.setView(endDlog);
                     dlg.setCancelable(false);
@@ -235,13 +249,13 @@ public class Chapter01 extends AppCompatActivity {
                 characterImg.setImageResource(R.drawable.c);
                 nameBox.setText("박시언");
                 break;
-            case "박시은":
+            case "박시플":
                 characterImg.setImageResource(R.drawable.cpp);
-                nameBox.setText("박시은");
+                nameBox.setText("박시플");
                 break;
-            case "박시샤":
+            case "박시샵":
                 characterImg.setImageResource(R.drawable.cs);
-                nameBox.setText("박시샤");
+                nameBox.setText("박시샵");
                 break;
             case "파이썬":
                 characterImg.setImageResource(R.drawable.py);
@@ -274,8 +288,10 @@ public class Chapter01 extends AppCompatActivity {
                         cursorPoint.moveToFirst();
                         db.execSQL("UPDATE userTable SET likability = '"+(Likability+cursorPoint.getInt(1))+"';");
                     }
+                    chapter01Player.stop();
                     Intent backIntent = new Intent(getApplicationContext(),storyListActivity.class);
-                    startActivity(backIntent);
+                    setResult(RESULT_OK, backIntent);
+                    finish();
                 }
             });
             dlg.setNegativeButton("게임으로 돌아가기",null);

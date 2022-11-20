@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class diaryListActivity extends AppCompatActivity {
     SQLiteDatabase db;
     TextView guideText;
     ArrayList diaryList;
+    MediaPlayer diaryPlayer;
     ArrayAdapter<String> diaryAdapter;
     ListView diaryListView;
     static int day;
@@ -38,7 +40,8 @@ public class diaryListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent backIntent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(backIntent);
+                setResult(RESULT_OK, backIntent);
+                finish();
             }
         });
         guideText = findViewById(R.id.guide_text);

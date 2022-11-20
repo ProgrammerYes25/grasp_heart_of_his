@@ -37,6 +37,7 @@ public class storyListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent backIntent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(backIntent);
+                finish();
             }
         });
         storyListView = findViewById(R.id.story_list_view);

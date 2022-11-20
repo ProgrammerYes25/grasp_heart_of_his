@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import java.util.Scanner;
 public class Prologue extends AppCompatActivity {
     TextView chapterText, endTitle, endLikability, endTotal;
     ImageView characterImg;
+    MediaPlayer prologuePlayer;
     Button chatBox, nameBox, backBtn, endBtn;
     DBHelper dbHelper;
     SQLiteDatabase db;
@@ -42,7 +44,8 @@ public class Prologue extends AppCompatActivity {
         nameBox = findViewById(R.id.name_box);
         backBtn = findViewById(R.id.back_btn);
         story = findViewById(R.id.story_layout);
-
+        prologuePlayer = MediaPlayer.create(this, R.raw.elgar_pomp_and_circumstance_op39_1_elgar1932_track01);
+        prologuePlayer.start();
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();
         Cursor cursor;
@@ -81,19 +84,19 @@ public class Prologue extends AppCompatActivity {
                     endBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            prologuePlayer.stop();
                             Intent mainIntene = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(mainIntene);
+                            setResult(RESULT_OK, mainIntene);
+                            finish();
                         }
                     });
-
+                    chatBox.setClickable(false);
                     endTitle = endDlog.findViewById(R.id.end_title);
                     endLikability = endDlog.findViewById(R.id.end_likability);
                     endTotal = endDlog.findViewById(R.id.end_total);
-
                     endTitle.setText("♠Prologue 클리어♠");
                     endLikability.setText("♥ 받은 호감도: 0");
                     endTotal.setText("♥ 총합 호감도: "+cursor.getString(1));
-
                     AlertDialog.Builder dlg = new AlertDialog.Builder(Prologue.this);
                     dlg.setView(endDlog);
                     dlg.setCancelable(false);
@@ -154,8 +157,10 @@ public class Prologue extends AppCompatActivity {
             backDlg.setPositiveButton("나가기", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    prologuePlayer.stop();
                     Intent backIntent = new Intent(getApplicationContext(),storyListActivity.class);
-                    startActivity(backIntent);
+                    setResult(RESULT_OK, backIntent);
+                    finish();
                 }
             });
             backDlg.setNegativeButton("게임으로 돌아가기",null);

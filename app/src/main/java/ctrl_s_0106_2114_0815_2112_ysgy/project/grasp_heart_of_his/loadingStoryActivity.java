@@ -41,6 +41,7 @@ public class loadingStoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent storyIntense = new Intent(getApplicationContext(), chapterList[chapter]);
                 startActivity(storyIntense);
+                finish();
             }
         });
     }
