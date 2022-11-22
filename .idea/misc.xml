@@ -12,13 +12,14 @@
         <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/activity_diary.xml" value="0.16666666666666666" />
         <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/activity_diary_list.xml" value="0.22" />
         <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/activity_loading_story.xml" value="0.1" />
-        <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/activity_main.xml" value="0.13333333333333333" />
+        <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/activity_start.xml" value="0.1" />
         <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/activity_story.xml" value="0.16666666666666666" />
         <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/activity_story_list.xml" value="0.12" />
         <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/end_dlog.xml" value="0.16666666666666666" />
         <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/name_dlog.xml" value="0.18125" />
         <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/question_dlog.xml" value="0.18125" />
+        <entry key="..\:/Android_ctrl_s1/grasp_heart_of_his/app/src/main/res/layout/setting_dlog.xml" value="0.1" />
       </map>
     </option>
   </component>
@@ -31,7 +32,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.18125" />
+        <option name="scale" value="0.22" />
       </ProjectState>
     </option>
   </component>

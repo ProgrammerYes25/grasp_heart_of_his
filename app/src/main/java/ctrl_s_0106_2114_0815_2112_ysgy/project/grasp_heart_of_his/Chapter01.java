@@ -93,7 +93,7 @@ public class Chapter01 extends AppCompatActivity {
                         qdlg = new AlertDialog.Builder(Chapter01.this);
                         inputText = getResources().openRawResource(chapter01List[resNum++]);
                         scA = new Scanner(inputText, "UTF-8");
-                        TextView questionText = questionDlog.findViewById(R.id.question_text);
+                        TextView questionText = questionDlog.findViewById(R.id.name_text);
                         Button btn1 = questionDlog.findViewById(R.id.answer_1);
                         Button btn2 = questionDlog.findViewById(R.id.answer_2);
                         Button btn3 = questionDlog.findViewById(R.id.answer_3);

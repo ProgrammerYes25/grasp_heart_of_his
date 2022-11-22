@@ -7,25 +7,42 @@
     android:background="@drawable/main_background"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="40dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/profile_img"/>
-        <TextView
-            android:id="@+id/likability_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="240dp"
-            android:textStyle="bold"
-            android:textColor="#8A8A8A"
-            android:textSize="10pt"
-            android:text="0"/>
-    </FrameLayout>
+        android:orientation="horizontal"
+        android:padding="20dp">
+        <FrameLayout
+            android:layout_width="310dp"
+            android:layout_height="50dp"
+            android:padding="5dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/profile_img"/>
+            <TextView
+                android:id="@+id/likability_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="240dp"
+                android:textStyle="bold"
+                android:textColor="#8A8A8A"
+                android:textSize="10pt"
+                android:text="0"/>
+        </FrameLayout>
+        <Button
+            android:id="@+id/setting_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="2dp"
+            android:textSize="9pt"
+            android:textColor="#E91E1E"
+            android:text="♥"
+            android:background="@drawable/name_btn"
+            />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

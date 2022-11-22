@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/chat_window"
+    android:orientation="vertical"
+    android:padding="20dp">
+    <TextView
+        android:id="@+id/name_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="10pt"
+        android:padding="10dp"
+        android:text="이름 들어오는 자리입니다"/>
+    <TextView
+        android:id="@+id/chapter_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:textColor="@color/black"
+        android:textSize="9pt"
+        android:text="문제가 들어오는 자리입니다문제가 들어오는 자리입니다"/>
+    <Button
+        android:id="@+id/reset_name_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:textSize="9pt"
+        android:text="이름 바꾸기"
+        android:background="@drawable/name_btn"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/reset_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="9pt"
+            android:text="진행사항 리셋"
+            android:background="@drawable/name_btn"/>
+        <Button
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:padding="10dp"
+            android:textSize="9pt"
+            android:text="닫기"
+            android:background="@drawable/name_btn"/>
+    </LinearLayout>
+
+</LinearLayout>

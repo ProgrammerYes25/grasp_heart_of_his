@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mainPlayer;
     DBHelper dbHelper;
     SQLiteDatabase db;
-    View nameDlog;
-    Button saveNameBtn;
+    View nameDlog, setDlog;
+    Button saveNameBtn, settingBtn;
     EditText editName;
     TextView likabilityText;
-    AlertDialog.Builder checkDlg;
-    AlertDialog alertDialog;
+    AlertDialog.Builder checkDlg, setDlg;
+    AlertDialog alertDialog, setDialog;
 
     private long backBtnTime = 0l;
     @Override
@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         storyBtn = findViewById(R.id.story_btn);
         diaryBtn = findViewById(R.id.diary_btn);
+        settingBtn = findViewById(R.id.setting_btn);
+        settingBtn.setOnClickListener(settingOnClickListener);
         mainPlayer = MediaPlayer.create(this, R.raw.main_mp3);
         mainPlayer.setLooping(true);
         mainPlayer.start();
@@ -74,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     editName = nameDlog.findViewById(R.id.edit_name);
                     checkDlg = new AlertDialog.Builder(MainActivity.this);
-                    checkDlg.setTitle("정말 이 이름으로 하시겠습니까?");
-                    checkDlg.setMessage("한번 정하면 바꾸지 못합니다.");
+                    checkDlg.setTitle("이 이름으로 하시겠습니까?");
+                    checkDlg.setMessage("추후에 변경 가능합니다.");
                     checkDlg.setPositiveButton("계속하기", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -118,5 +120,89 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    View.OnClickListener settingOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Cursor cursor;
+            cursor = db.rawQuery("SELECT * FROM userTable;",null);
+            setDlog = View.inflate(MainActivity.this, R.layout.setting_dlog, null);
+            setDlg = new AlertDialog.Builder(MainActivity.this);
+            TextView nameText = setDlog.findViewById(R.id.name_text);
+            TextView chapterText = setDlog.findViewById(R.id.chapter_text);
+            Button resetNameBtn = setDlog.findViewById(R.id.reset_name_btn);
+            Button resetBtn = setDlog.findViewById(R.id.reset_btn);
+            Button backBtn =setDlog.findViewById(R.id.back_btn);
+            cursor.moveToFirst();
+            nameText.setText("이름: "+cursor.getString(0));
+            chapterText.setText("이 세계에 온지 D+"+cursor.getInt(2)+"Day");
+            setDlg.setView(setDlog);
+            setDlg.setCancelable(false);
+            setDialog = setDlg.create();
+            setDialog.show();
+            backBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setDialog.dismiss();
+                }
+            });
+            resetBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editName = nameDlog.findViewById(R.id.edit_name);
+                    checkDlg = new AlertDialog.Builder(MainActivity.this);
+                    checkDlg.setTitle("정말 리셋 하시겠습니까?");
+                    checkDlg.setPositiveButton("계속하기", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dbHelper.onUpgrade(db, db.getVersion(), db.getVersion()+1);
+                            Intent mainIntene = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(mainIntene);
+                            Toast.makeText(MainActivity.this, "리셋 되었습니다.",Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                    checkDlg.setNegativeButton("다시확인", null);
+                    checkDlg.setCancelable(false);
+                    checkDlg.show();
+                }
+            });
+            resetNameBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        nameDlog = View.inflate(MainActivity.this, R.layout.name_dlog, null);
+                        saveNameBtn = nameDlog.findViewById(R.id.save_name_btn);
+                        saveNameBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                editName = nameDlog.findViewById(R.id.edit_name);
+                                checkDlg = new AlertDialog.Builder(MainActivity.this);
+                                checkDlg.setTitle("이 이름으로 하시겠습니까?");
+                                checkDlg.setPositiveButton("계속하기", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String name = editName.getText().toString();
+                                        if(name.equals("")){
+                                            name = "백희진";
+                                        }
+                                        db.execSQL("UPDATE userTable SET user_name = '"+name+"';");
+                                        Toast.makeText(MainActivity.this, "이름이 변경 되었습니다.",Toast.LENGTH_SHORT).show();
+                                        alertDialog.dismiss();
+                                        setDialog.dismiss();
+                                    }
+                                });
+                                checkDlg.setNegativeButton("다시확인", null);
+                                checkDlg.setCancelable(false);
+                                checkDlg.show();
+                            }
+                        });
+                        AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+                        dlg.setView(nameDlog);
+                        dlg.setCancelable(false);
+                        alertDialog = dlg.create();
+                        alertDialog.show();
+                }
+            });
+        }
+    };
 
 }
