@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     ImageView storyBtn, diaryBtn;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     TextView likabilityText;
     AlertDialog.Builder checkDlg;
     AlertDialog alertDialog;
+
+    private long backBtnTime = 0l;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 mainPlayer.stop();
                 Intent storyListIntene = new Intent(getApplicationContext(), storyListActivity.class);
                 startActivity(storyListIntene);
+                finish();
             }
         });
         diaryBtn.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 mainPlayer.stop();
                 Intent diaryListIntene = new Intent(getApplicationContext(), diaryListActivity.class);
                 startActivity(diaryListIntene);
+                finish();
             }
         });
         //데이터 베이스 close
@@ -97,4 +102,21 @@ public class MainActivity extends AppCompatActivity {
             likabilityText.setText(Integer.toString(cursor.getInt(1)));
         }
     }
+    @Override
+    public void onBackPressed() {
+        long curTime = System.currentTimeMillis();
+        long gapTime = curTime - backBtnTime;
+
+        if(0 <= gapTime && 2000 >= gapTime) {
+            super.onBackPressed();
+            finish();
+        }
+        else {
+            backBtnTime = curTime;
+            Toast.makeText(this, "한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
 }

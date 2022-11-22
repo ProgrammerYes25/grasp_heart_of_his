@@ -168,4 +168,8 @@ public class Prologue extends AppCompatActivity {
             backDlg.show();
         }
     };
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }

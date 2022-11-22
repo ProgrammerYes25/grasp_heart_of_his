@@ -61,4 +61,8 @@ public class DiaryActivity extends AppCompatActivity {
             dlg.show();
         }
     };
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }

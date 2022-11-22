@@ -128,4 +128,8 @@ public class storyListActivity extends AppCompatActivity {
             storyList.add("Chapter "+cursor.getInt(0));
         }
     }
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }

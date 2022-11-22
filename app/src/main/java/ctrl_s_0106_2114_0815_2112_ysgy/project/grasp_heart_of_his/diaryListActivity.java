@@ -96,4 +96,8 @@ public class diaryListActivity extends AppCompatActivity {
             diaryList.add("D+" + cursor.getInt(0)+"Day");
         }
     }
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }
